@@ -1,4 +1,4 @@
-### Sistema de aprovação remoda de solicitações efeituada no pdv da loja 01 do mercado borba
+# Sistema de aprovação remota de solicitações efeituada no pdv da loja 01 do mercado borba
 
 ## Contexto
 
@@ -80,3 +80,44 @@ NUMERO DO PDV / IP
 ## Requisitos não funcionais
 
 Das linguaguem a ser utilizada
+
+## Estrutura das pastas
+
+/pdv-remote-approval
+│
+├── /backend-java # API REST, WebSockets e Regras de Negócio
+│ ├── /src
+│ │ ├── /main/java/com/mercado/pdv
+│ │ │ ├── /controllers # Endpoints REST (recebem as requisições web)
+│ │ │ ├── /websockets # Gerenciamento de conexões em tempo real
+│ │ │ ├── /services # Lógica de negócio (validações, regras automáticas)
+│ │ │ ├── /models # Entidades do banco de dados (Solicitacao, Usuario)
+│ │ │ └── /repositories # Comunicação com o banco de dados
+│ │ └── /resources
+│ │ └── application.properties # Configurações de BD e portas
+│ └── pom.xml (ou build.gradle)
+│
+├── /frontend-js # Interface Web para Operadores e Fiscais
+│ ├── /public # Ícones, index.html estático
+│ ├── /src
+│ │ ├── /components # Botões reutilizáveis, modais, cards de solicitação
+│ │ ├── /pages # Telas inteiras (Login, PainelOperador, PainelFiscal)
+│ │ ├── /services # Arquivos que fazem as chamadas para o backend Java (Axios/Fetch/Socket)
+│ │ ├── /hooks # (Opcional) Lógicas customizadas para timer de 5 min
+│ │ └── App.js # Ponto de entrada das rotas da aplicação
+│ └── package.json # Dependências do frontend
+│
+├── /agent-cpp # Executável que vai rodar fisicamente no PDV
+│ ├── /include # Arquivos de cabeçalho (.h / .hpp)
+│ │ ├── keyboard_injector.h # Definições da API do SO para controle de teclado
+│ │ ├── socket_client.h # Definições da comunicação com o servidor Java
+│ │ └── window_manager.h # Definições para garantir foco na tela do PDV
+│ ├── /src # Arquivos de implementação (.cpp)
+│ │ ├── main.cpp # Loop principal de execução do serviço
+│ │ ├── keyboard_injector.cpp
+│ │ ├── socket_client.cpp  
+│ │ └── window_manager.cpp  
+│ └── CMakeLists.txt # Arquivo de configuração de compilação do C++
+│
+├── README.md # Documentação geral de como rodar cada camada
+└── .gitignore # Arquivo para ignorar node_modules, .class, .exe, etc.
