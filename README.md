@@ -73,13 +73,30 @@ NUMERO DO PDV / IP
 101 / 192.168.20.101
 102 / 192.168.20.102
 
-## Requisitos funcionais do sistema
+## Requisitos Funcionais (RF)
 
-1. O sistema deve possuir um interface web
+- **RF01 - Interface Web de Solicitação e Aprovação:** O sistema deve possuir uma interface web responsiva para a criação de solicitações por operadores e avaliação por fiscais/gerentes.
+- **RF02 - Tipagem e Justificativa:** Permitir a criação de requisições categorizadas (Cancelamento de Venda, Cancela Item, Desconto, Retirada, Suprimento, Crédito Rotativo) com exigência de dados complementares predefinidos conforme o tipo.
+- **RF03 - Exigência de Credenciais:** Exigir a validação de matrícula e senha do usuário em ações críticas (enviar e aprovar), independentemente da sessão já estar logada.
+- **RF04 - Controle de Validade:** Cada requisição deve ter validade de 5 minutos, sendo alterada para o status "Expirada" automaticamente após esse prazo.
+- **RF05 - Atualização em Tempo Real:** Fiscais devem ser notificados imediatamente sobre novas requisições, e operadores devem ver o status e o tempo restante sem recarregar a página.
+- **RF06 - Autorização Baseada em Regras (ACL):** Fiscais visualizam e aprovam apenas as requisições para as quais possuem privilégios configurados.
+- **RF07 - Regra de Exclusividade:** Bloquear novas requisições se houver uma em aberto para o mesmo solicitante ou PDV, exigindo o cancelamento da requisição travada antes de abrir uma nova.
+- **RF08 - Identificação de Origem:** Registrar e exigir o número do PDV de origem (ex: 101, 102) no ato da solicitação.
+- **RF09 - Painel de Auditoria e Filtros:** Permitir filtros por status (Em aberto, Cancelada, Aprovada, Expirada) na listagem, com padrão "Em aberto", exibindo resumo com Nome, Tipo e Motivo.
+- **RF10 - Validação de Concorrência:** O backend deve revalidar se a solicitação continua ativa (não cancelada/expirada) no exato instante da aprovação, antes de disparar a instrução para o PDV.
+- **RF11 - Aprovação Automática Parametrizável:** Possuir módulo de configuração de horários e dias para aprovação automática, utilizando um usuário de sistema fictício para não comprometer a auditoria humana.
+- **RF12 - Injeção de Eventos (Client C++):** O executável local deve escutar o servidor, inserir o caractere sublinhado ("\_"), simular as teclas mapeadas (C, E, R) e injetar as credenciais no PDV.
 
-## Requisitos não funcionais
+---
 
-Das linguaguem a ser utilizada
+## Requisitos Não Funcionais (RNF)
+
+- **RNF01 - Stack Tecnológico:** O projeto será dividido em Backend Java (API/WebSockets), Frontend em JavaScript e Agente Local em C++ rodando em background nos PDVs.
+- **RNF02 - Comunicação Bidirecional:** Utilizar WebSockets ou Sockets TCP/gRPC para garantir a atualização de status na web e o envio imediato de comandos ao agente C++.
+- **RNF03 - Segurança em Trânsito:** Criptografar obrigatoriamente a comunicação interna (TLS ou chave assimétrica) para proteger o tráfego de matrículas e senhas na rede local.
+- **RNF04 - Controle de Foco do Sistema Operacional:** O agente C++ deve garantir, via API nativa do SO, que a janela correta do PDV está em foco e ativa antes de iniciar a injeção de teclas.
+- **RNF05 - Resiliência do Agente:** O executável em C++ deve rodar como um serviço de sistema, com política de reinício automático em caso de falhas ou reinicialização da máquina.
 
 ## Estrutura das pastas
 
