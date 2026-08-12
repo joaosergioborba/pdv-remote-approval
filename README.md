@@ -146,9 +146,9 @@ A documentação especifica de cada parte do sistema estará disponível dentro 
 
 ### Entidades do sistema
 
-- **Usuarios:** id, nome, matricula, senha, role, status, create_at, update_at.
+- **Usuarios:** id, nome, matricula, senha, nivel, ativo, create_at, update_at.
 - **Equipamentos:** id, numero_pdv, ip_pdv, porta_comunicacao_agente.
 - **Solicitações:** id, id_tipo_solicitacao, motivo_solicitacao, usuario_solicitante, usuario_aprovador, status, nome_cliente, codigo_cliente, create_at, update_at, id_pdv, item_cancelado, limite_excedido, data_expiracao.
 - **Regras_horarios_aprovacao_automatica:** id, dia_unico, hora_inicio, hora_fim, segunda, terca, quarta, quinta, sexta, sabado, domingo.
-- **Acoes_autorizadas_aprovacao_automatica**: id, acao, tecla_associada.
-- **Liberacao_automatica_regra:** id, id_regra_horarios_aprovacao_automatica, id_acoes_autorizadas_aprovacao_automatica, ativo.
+- **Acoes_de_liberacao**: id, acao, tecla_associada.
+- **Liberacao_automatica:** id, id_regra_horarios_aprovacao_automatica, id_Acoes_de_liberacao, ativo.
