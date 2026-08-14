@@ -5,12 +5,10 @@ CREATE TYPE status_solicitacao AS ENUM ('em_aberto', 'aprovado', 'cancelado', 'e
 CREATE TYPE nivel_usuario AS ENUM ('operador', 'fiscal', 'gerente');
 
 
-
-
 CREATE TABLE IF NOT EXISTS usuarios (
-  id          INTEGER       GENERATEd ALWAYS AS IDENTITY PRIMARY KEY,
-  nome        TEXT          NOT NULL,
-  matricula   TEXT          NOT NULL UNIQUE,
+  id                        INTEGER GENERATEd ALWAYS AS IDENTITY PRIMARY KEY,
+  nome                      TEXT          NOT NULL,
+  matricula                 TEXT          NOT NULL UNIQUE,
   nivel       nivel_usuario NOT NULL, 
   ativo       BOOLEAN       NOT NULL DEFAULT TRUE,
   created_at   TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -24,8 +22,8 @@ CREATE TABLE IF NOT EXISTS equipamentos (
   ip_pdv                   INTEGER NOT NULL,
   porta_comunicacao_agente INTEGER NOT NULL,
   ativo                    BOOLEAN NOT NULL DEFAULT TRUE, 
-  created_at                TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at                TIMESTAMPTZ
+  created_at               TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at               TIMESTAMPTZ
 
 );
 
