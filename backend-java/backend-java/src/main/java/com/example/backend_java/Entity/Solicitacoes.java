@@ -28,17 +28,17 @@ public class Solicitacoes {
     @JoinColumn(name = "id_acao_de_liberacao")
     private AcoesDeLiberacoes idAcaoDeLiberacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_motivo_solicitacao", columnDefinition = "text")
+
+    @Column(name = "id_motivo_solicitacao", columnDefinition = "text")
     private String idMotivoSolicitacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario_solicitante")
-    private Integer idUsuarioSolicitante;
+    private Usuario idUsuarioSolicitante;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario_aprovador")
-    private Integer idUsuarioAprovador;
+    private Usuario idUsuarioAprovador;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

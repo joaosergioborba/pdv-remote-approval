@@ -26,7 +26,9 @@ public class Usuario {
     @Column(name = "matricula", columnDefinition = "text")
     private String matricula;
 
-    @Column(name = "nivel")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "nivel", nullable = false)
     private NIVEL_USUARIO nivel ;
 
     @Column(name = "ativo")

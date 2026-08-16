@@ -6,7 +6,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "acoes_de_liberacoes")
+@Table(name = "acoes_de_liberacao")
 @Getter
 @Setter
 public class AcoesDeLiberacoes {
@@ -18,7 +18,7 @@ public class AcoesDeLiberacoes {
     @Column(name = "acao", columnDefinition = "text")
     private String acao;
 
-    @Column(name = "tecla_associada", columnDefinition = "varchar(1)",length = 1)
+    @Column(name = "tecla_associada",length = 1)
     private String teclaAssociada;
 }
 

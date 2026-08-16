@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 @Entity
-@Table(name = "regras_horarios_aprovacao_automatico")
+@Table(name = "regras_horarios_aprovacao_automatica")
 @Setter
 @Getter
 public class RegrasHorariosAprovacaoAutomatica {
