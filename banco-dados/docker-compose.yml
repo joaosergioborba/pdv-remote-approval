@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  db_remote_approval:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: masterkey
+      POSTGRES_DB: pdv_approval_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
