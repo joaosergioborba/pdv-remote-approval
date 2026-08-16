@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   id                        INTEGER GENERATEd ALWAYS AS IDENTITY PRIMARY KEY,
   nome                      TEXT          NOT NULL,
   matricula                 TEXT          NOT NULL UNIQUE,
+  senha                     TEXT          NOT NULL,
   nivel       nivel_usuario NOT NULL, 
   ativo       BOOLEAN       NOT NULL DEFAULT TRUE,
   created_at   TIMESTAMPTZ    NOT NULL DEFAULT CURRENT_TIMESTAMP,

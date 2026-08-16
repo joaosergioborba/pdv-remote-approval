@@ -7,14 +7,14 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Date;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "solicitacoes")
 @Setter
 @Getter
-public class Solicitacoes {
+public class Solicitacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +63,26 @@ public class Solicitacoes {
 
     @Column(name = "limite_excedido")
     private float limiteExedido;
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Solicitacao solicitacoes = (Solicitacao) o;
+        return Objects.equals(id, solicitacoes.id);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+
+        return "Solicitacao{" + "id=" + id + "}";
+
+    }
 
 
 }
