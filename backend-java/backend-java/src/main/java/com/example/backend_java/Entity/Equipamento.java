@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Date;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "equipamentos")
@@ -35,6 +36,26 @@ public class Equipamento {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private OffsetDateTime updatedAt;
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Equipamento equipamento = (Equipamento) o;
+        return Objects.equals(id, equipamento.id);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+
+        return "Equipamento{" + "id=" + id + "}";
+
+    }
 
 
 
