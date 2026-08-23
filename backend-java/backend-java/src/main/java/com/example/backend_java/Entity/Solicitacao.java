@@ -7,14 +7,14 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.sql.Date;
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "solicitacoes")
 @Setter
 @Getter
-public class Solicitacoes {
+public class Solicitacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,17 +28,17 @@ public class Solicitacoes {
     @JoinColumn(name = "id_acao_de_liberacao")
     private AcoesDeLiberacoes idAcaoDeLiberacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_motivo_solicitacao", columnDefinition = "text")
+
+    @Column(name = "id_motivo_solicitacao", columnDefinition = "text")
     private String idMotivoSolicitacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario_solicitante")
-    private Integer idUsuarioSolicitante;
+    private Usuario idUsuarioSolicitante;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario_aprovador")
-    private Integer idUsuarioAprovador;
+    private Usuario idUsuarioAprovador;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -63,6 +63,26 @@ public class Solicitacoes {
 
     @Column(name = "limite_excedido")
     private float limiteExedido;
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Solicitacao solicitacoes = (Solicitacao) o;
+        return Objects.equals(id, solicitacoes.id);
+    }
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString(){
+
+        return "Solicitacao{" + "id=" + id + "}";
+
+    }
 
 
 }
