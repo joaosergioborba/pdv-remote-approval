@@ -1,9 +1,11 @@
 package com.example.backend_java.Controller;
 
 
+import com.example.backend_java.DTO.CreateUserDTO;
 import com.example.backend_java.Entity.Usuario;
 import com.example.backend_java.Service.UsuarioService;
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class usuarioControlller {
     private final UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario){
+    public ResponseEntity<Usuario> create(@RequestBody @Valid CreateUserDTO usuario){
         try {
            Usuario user =  usuarioService.salvar(usuario);
            return ResponseEntity.status(HttpStatus.CREATED).body(user);

@@ -1,6 +1,7 @@
 package com.example.backend_java.Entity;
 
 
+import com.example.backend_java.DTO.CreateUserDTO;
 import com.example.backend_java.enun.NIVEL_USUARIO;
 import jakarta.persistence.*;
 import lombok.Getter;
