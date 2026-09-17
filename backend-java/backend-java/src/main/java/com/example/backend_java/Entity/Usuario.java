@@ -4,20 +4,29 @@ package com.example.backend_java.Entity;
 import com.example.backend_java.DTO.CreateUserDTO;
 import com.example.backend_java.enun.NIVEL_USUARIO;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
 import java.time.OffsetDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "usuarios")
 @Getter
 @Setter
-public class Usuario {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Usuario implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,10 +34,10 @@ public class Usuario {
     @Column(name = "nome", columnDefinition = "text")
     private String nome;
 
-    @Column(name = "matricula", columnDefinition = "text")
+    @Column(name = "matricula", columnDefinition = "text", nullable = false)
     private String matricula;
 
-    @Column(name = "senha", columnDefinition = "text")
+    @Column(name = "senha", columnDefinition = "text", nullable = false)
     private String senha;
 
     @Enumerated(EnumType.STRING)
@@ -37,7 +46,6 @@ public class Usuario {
 
     @Column(name = "ativo")
     private boolean ativo;
-
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -66,5 +74,17 @@ public class Usuario {
         return "Usuario{" + "id=" + id + "}";
 
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return List.of(new SimpleGrantedAuthority(nivel.name()));
+    }
+
+    @Override
+    public String getPassword() { return senha; }
+
+    @Override
+    public String getUsername() { return matricula; }
 
 }

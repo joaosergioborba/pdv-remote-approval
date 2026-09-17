@@ -1,5 +1,6 @@
 package com.example.backend_java.DTO;
 
+import com.example.backend_java.enun.NIVEL_USUARIO;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
@@ -13,5 +14,8 @@ public record CreateUserDTO (
         String matricula,
 
         @NotBlank(message = "A senha é obrigatoria")
-        String senha
+        String senha,
+
+        NIVEL_USUARIO nivel
+
 ){}
