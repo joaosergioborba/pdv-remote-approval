@@ -1,0 +1,28 @@
+# DOCUMENTAÇÃO
+
+## Cadastro de usuário
+
+endpoint: /usuarios/cadastrar
+Tipo de requisicao: POST
+
+body: {
+      	"matricula": "400002",
+      	"senha": "810501",
+      	"nome": "Joao sergio borba",
+      	"nivel": "gerente",
+
+      }
+
+     Para fazer essa requisicao deve ser informado a matricula, senha, nome, nivel
+
+
+      @NotBlank(message = "O nome é obrigatorio")
+              String nome,
+
+              @NotBlank(message = "A matricula é obrigatoria")
+              String matricula,
+
+              @NotBlank(message = "A senha é obrigatoria")
+              String senha,
+
+              NIVEL_USUARIO nivel
