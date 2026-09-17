@@ -46,7 +46,6 @@ public class usuarioControlller {
                     .ativo(true)
                     .build();
 
-            System.out.println(novoUsuario.getNivel() + novoUsuario.getMatricula());
             Usuario user =  usuarioService.salvar(novoUsuario);
            return ResponseEntity.status(HttpStatus.CREATED).body(user);
 

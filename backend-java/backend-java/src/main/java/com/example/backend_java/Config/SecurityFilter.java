@@ -27,15 +27,11 @@ public class SecurityFilter  extends OncePerRequestFilter {
     @Autowired
     private UsuarioRepo usuarioRepo;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         var token =  this.recoveryToken(request);
-        System.out.println("token" + token);
-
         if (token != null) {
-
 
            String matricula =  tokenService.validarToken(token);
 
@@ -47,7 +43,6 @@ public class SecurityFilter  extends OncePerRequestFilter {
 
                SecurityContextHolder.getContext().setAuthentication(authentication);
            }
-
 
         }
         filterChain.doFilter(request, response);

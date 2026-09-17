@@ -41,7 +41,6 @@ public class LoginService implements UserDetailsService {
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         if(auth.isAuthenticated()){
-            System.out.println("aqui meu frind" + ((Usuario)auth.getPrincipal()).getMatricula());
           return tokenService.gerarToken(((Usuario) auth.getPrincipal()).getMatricula());
 
         }
