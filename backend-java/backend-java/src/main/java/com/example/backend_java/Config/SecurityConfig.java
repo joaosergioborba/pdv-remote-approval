@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "auth/login").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        //.requestMatchers(HttpMethod.POST, "usuarios/cadastrar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "usuarios/cadastrar").hasRole("fiscal")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -53,8 +53,10 @@ public class SecurityConfig {
     @Bean
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
-        // ADMIN herda ROLE_STAFF, que herda ROLE_USER, que herda ROLE_GUEST
-        hierarchy.setHierarchy("gerente > fiscal > operador");
-        return hierarchy;
-    }
+        hierarchy.setHierarchy("""
+                ROLE_gerente > ROLE_fiscal
+                ROLE_fiscal > ROLE_operador
+        """);
+    return hierarchy;
+}
 }

@@ -24,28 +24,12 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-
-
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginDTO data){
 
-
-
-
-            System.out.println(data.matricula());
-
             String token = loginService.Login(data.matricula(), data.senha());
-
-            System.out.println(token);
-
-            if (token != null) {
-
-                return ResponseEntity.status(HttpStatus.OK).body(token);
-
-            }
-
+            if (token != null) return ResponseEntity.status(HttpStatus.OK).body(token);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
 
     }
 }
