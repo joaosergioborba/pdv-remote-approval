@@ -35,6 +35,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "auth/login").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers(HttpMethod.POST, "usuarios/cadastrar").hasRole("fiscal")
+                        .requestMatchers(HttpMethod.POST, "equipamentos/**").hasRole("tecnologia")
+                        .requestMatchers("/v3/api-docs/**", "/scalar.html").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -54,6 +56,7 @@ public class SecurityConfig {
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
         hierarchy.setHierarchy("""
+                ROLE_tecnologia > ROLE_gerente
                 ROLE_gerente > ROLE_fiscal
                 ROLE_fiscal > ROLE_operador
         """);
