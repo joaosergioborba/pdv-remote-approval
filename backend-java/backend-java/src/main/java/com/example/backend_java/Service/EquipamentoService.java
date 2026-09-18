@@ -14,8 +14,6 @@ public class EquipamentoService {
     @Autowired
     private EquipamentoRepo equipamentoRepo;
 
-
-
     public Equipamento CreateEquipamentoService(Equipamento equipamento){
 
         if(equipamentoRepo.findByNumeroPdv(equipamento.getNumeroPdv()).isPresent() || (equipamentoRepo.findByIpPdv(equipamento.getIpPdv()).isPresent())){
