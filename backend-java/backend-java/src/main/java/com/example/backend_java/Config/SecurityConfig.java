@@ -54,6 +54,7 @@ public class SecurityConfig {
     public RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
         hierarchy.setHierarchy("""
+                ROLE_tecnologia > ROLE_gerente
                 ROLE_gerente > ROLE_fiscal
                 ROLE_fiscal > ROLE_operador
         """);

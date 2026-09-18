@@ -20,10 +20,10 @@ public class Equipamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "numero_pdv")
+    @Column(name = "numero_pdv", nullable = false)
     private Integer  numeroPdv;
 
-    @Column(name = "porta_comunicacao_agente")
+    @Column(name = "porta_comunicacao_agente", nullable = false)
     private Integer portaComunicacaoAgente;
 
     @Column(name = "ativo")
