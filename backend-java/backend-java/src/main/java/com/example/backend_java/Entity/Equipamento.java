@@ -1,8 +1,7 @@
 package com.example.backend_java.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,6 +13,9 @@ import java.util.Objects;
 @Table(name = "equipamentos")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Equipamento {
 
     @Id
@@ -25,6 +27,10 @@ public class Equipamento {
 
     @Column(name = "porta_comunicacao_agente", nullable = false)
     private Integer portaComunicacaoAgente;
+
+    @Column(name = "ip_pdv", nullable = false)
+    private String ipPdv;
+
 
     @Column(name = "ativo")
     private boolean ativo;

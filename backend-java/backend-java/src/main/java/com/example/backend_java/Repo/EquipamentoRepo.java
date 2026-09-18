@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface EquipamentoRepo extends JpaRepository<Equipamento, Integer> {
 
     Optional<Equipamento> findByNumeroPdv(Integer numeroPdv);
+
+    Optional<Equipamento> findByIpPdv(String ip);
 }
