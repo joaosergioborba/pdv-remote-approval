@@ -152,3 +152,35 @@ A documentação especifica de cada parte do sistema estará disponível dentro 
 - **Regras_horarios_aprovacao_automatica:** id, dia_unico, hora_inicio, hora_fim, segunda, terca, quarta, quinta, sexta, sabado, domingo.
 - **Acoes_de_liberacao**: id, acao, tecla_associada.
 - **Liberacao_automatica:** id, id_regra_horarios_aprovacao_automatica, id_Acoes_de_liberacao, ativo.
+
+
+## Acessar a documentação dos endpoints da API (OpenAPI / Scalar)
+
+A documentação interativa da API é gerada automaticamente a partir da especificação OpenAPI 3 (`springdoc-openapi`) e renderizada com a interface moderna do **Scalar**.
+
+### Acessando a Documentação
+
+Com a aplicação em execução, acesse a interface via navegador no seguinte endereço:
+
+* **UI Interativa (Scalar):** `http://localhost:3333/api/v1/scalar.html`
+* **Especificação OpenAPI (JSON):** `http://localhost:3333/api/v1/v3/api-docs`
+
+---
+
+### Mapeamento de Respostas e Erros
+
+Para garantir que os códigos de resposta e os payloads de erro sejam exibidos corretamente na documentação interativa, utilize as anotações do Swagger nas rotas do `@RestController`:
+
+```java
+@PostMapping
+@Operation(summary = "Descrição do endpoint", description = "Detalhamento da operação.")
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "201", description = "Recurso criado com sucesso"),
+    @ApiResponse(responseCode = "400", description = "Dados de requisição inválidos"),
+    @ApiResponse(responseCode = "401", description = "Não autorizado"),
+    @ApiResponse(responseCode = "404", description = "Recurso não encontrado"),
+    @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+})
+public ResponseEntity<MyResponseDto> criar(@RequestBody @Valid MyRequestDto dto) {
+    // ...
+}
