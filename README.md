@@ -98,6 +98,135 @@ NUMERO DO PDV / IP
 - **RNF04 - Controle de Foco do Sistema Operacional:** O agente C++ deve garantir, via API nativa do SO, que a janela correta do PDV está em foco e ativa antes de iniciar a injeção de teclas.
 - **RNF05 - Resiliência do Agente:** O executável em C++ deve rodar como um serviço de sistema, com política de reinício automático em caso de falhas ou reinicialização da máquina.
 
+## Casos de uso (UC)
+
+O diagrama de caso de uso pode ser visto em: https://drive.google.com/file/d/18YPTDXKDYOJqoP_LyOBNq1uS1qchzC82/view?usp=sharing
+
+### UC01 - Cadastra usuário
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão gerente, ou superior, cadastre novos usuários no sistema
+### 2. Atores
+
+* **Ator principal:** Gerente, Ti.
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir permissão mínima do nivel 'gerente'.
+
+### 4. Fluxo Principal
+### 5. Fluxo Alternativos
+
+#### FA001
+
+### 6. Fluxo de Exceção
+#### FE001 - Matricula do usuário já cadastrada
+
+### UC01 - Cadastra equipamento
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão 'tecnologia', cadastre novos equipamentos no sistema
+### 2. Atores
+
+* **Ator principal:** Ti
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir o nivel 'tecnologia'.
+
+### 4. Fluxo Principal
+### 5. Fluxo Alternativos
+
+#### FA001
+
+### 6. Fluxo de Exceção
+#### FE001 - Ip do dispositivo já cadastrado
+#### FE002 - Número do pdv já cadastrado
+
+### UC01 - Cadastra acoes de liberação
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão 'tecnologia', cadastre novos comandos de liberação, como libera cancelamento ou libera credito rotativo.
+### 2. Atores
+
+* **Ator principal:** Ti
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir o nivel 'tecnologia'.
+
+### 4. Fluxo Principal
+### 5. Fluxo Alternativos
+
+#### FA001
+
+### 6. Fluxo de Exceção
+#### FE001 - Tecla já cadastrada
+
+### UC01 - Cadastra Regra e horarios para liberação automatica pelo sistema
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão 'gerente', ou superior, cadastre novas parametrizações para que o sistema libere solicitações automaticamente em dias ou horarios especificos
+### 2. Atores
+
+* **Ator principal:** Gerente, Ti
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir o nivel 'gerente', ou superior.
+
+### 4. Fluxo Principal
+Se for dia unico, não deve permitir escolher dias da semana.
+### 5. Fluxo Alternativos
+#### FA001
+### 6. Fluxo de Exceção
+
+### UC01 - Cadastra Liberação remota
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão 'gerente', cadastre uma liberação remota.
+### 2. Atores
+
+* **Ator principal:** Gerente, Ti
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir o nivel 'gerente', ou superior.
+
+### 4. Fluxo Principal
+### 5. Fluxo Alternativos
+
+#### FA001
+
+### 6. Fluxo de Exceção
+
+
+### UC01 - Solicitação de autorização
+### 1. Descrição do caso de uso
+Permite que usuários com nivel de permissão 'operador', ou superior, solicite uma liberação ()
+### 2. Atores
+
+* **Ator principal:** Gerente, Ti
+
+### 3. Pré-condições
+
+* O usuário deve estar logado na plataforma.
+* O usuário deve possuir o nivel 'gerente', ou superior.
+
+### 4. Fluxo Principal
+### 5. Fluxo Alternativos
+
+#### FA001
+
+### 6. Fluxo de Exceção
+
+
+
+
+
+
+
+
 ## Estrutura das pastas
 
 ```text
@@ -152,6 +281,13 @@ A documentação especifica de cada parte do sistema estará disponível dentro 
 - **Regras_horarios_aprovacao_automatica:** id, dia_unico, hora_inicio, hora_fim, segunda, terca, quarta, quinta, sexta, sabado, domingo.
 - **Acoes_de_liberacao**: id, acao, tecla_associada.
 - **Liberacao_automatica:** id, id_regra_horarios_aprovacao_automatica, id_Acoes_de_liberacao, ativo.
+
+
+###Comentarios sobre as entidades:
+- Acho q é interessante adicionar uma descrição nas regras_horarios_aprovacao_Automatica, para facilitar a identificacao na hora de cadastrar uma liberacao automatica;
+- Tambem acho pertinente adicionar quem cadastrou o equipamento, as regras e horarios de liberacao e liberacao remota
+- na acoes_de_liberacao tambme tem q ter o nivel que pode liberar aquela funcao
+
 
 
 ## Acessar a documentação dos endpoints da API (OpenAPI / Scalar)
